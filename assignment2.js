@@ -95,6 +95,36 @@ getNameAndPrice(url2)
 
 
 
+//2).Sort by product name in ascending order
+async function sortProductsByName(url){
+    const answer2_2 = document.querySelector('.answer2_2');
+    const response2_2 = await fetch(url);
+    const data2_2 = await response2_2.json();
+
+  
+    //function sortByTitle uses title to sort the products
+    function sortByTitle(a,b) {
+        const first = a.title.toLowerCase();
+        const second = b.title.toLowerCase();
+        if(first>second) {
+            return 1;
+        }
+        else if(second>first) {
+            return -1;
+        }
+        else {return 0}
+    }
+
+
+    data2_2.sort(sortByTitle)
+    data2_2.forEach(element => {
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(JSON.stringify(element)));
+        answer2_2.appendChild(li);
+    })
+}
+sortProductsByName(url2)
+
 
 
 //1). Display all cats name is decending order
